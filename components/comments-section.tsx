@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent } from "@/components/ui/card"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { MessageCircle, Reply, Send, Clock, ChevronDown, ChevronUp, AlertCircle, CheckCircle } from "lucide-react"
+import { MessageCircle, Reply, Send, Clock, ChevronDown, ChevronUp, AlertCircle, CheckCircle, Trash2, Shield } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 
 interface Comment {
@@ -117,6 +117,7 @@ const CommentForm = React.memo(({ parentId = null, onCancel, newComment, setNewC
 })
 
 export default function CommentsSection({ blogPostId, className = "" }: CommentsSectionProps) {
+  // State management for comments functionality
   const [comments, setComments] = useState<Comment[]>([])
   const [loading, setLoading] = useState(true)
   const [submitting, setSubmitting] = useState(false)
