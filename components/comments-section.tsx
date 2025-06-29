@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent } from "@/components/ui/card"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { MessageCircle, Reply, Send, Clock, ChevronDown, ChevronUp, AlertCircle, CheckCircle, Trash2, Shield } from "lucide-react"
+import { MessageCircle, Reply, Send, Clock, ChevronDown, ChevronUp } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 
 interface Comment {
