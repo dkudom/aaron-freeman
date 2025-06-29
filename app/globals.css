@@ -1,0 +1,272 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Set default zoom level to 90% for both desktop and mobile */
+html {
+  zoom: 90%;
+}
+
+@layer base {
+  :root {
+    --background: 220 17% 98%; /* Light Gray */
+    --foreground: 220 15% 20%; /* Dark Gray */
+    --card: 0 0% 100%; /* White */
+    --card-foreground: 220 15% 20%; /* Dark Gray */
+    --popover: 0 0% 100%; /* White */
+    --popover-foreground: 220 15% 20%; /* Dark Gray */
+    --primary: 140 80% 35%; /* Dark Green */
+    --primary-foreground: 0 0% 100%; /* White */
+    --secondary: 140 50% 90%; /* Light Green */
+    --secondary-foreground: 140 80% 25%; /* Darker Green */
+    --muted: 210 30% 94%; /* Lighter Gray */
+    --muted-foreground: 210 10% 45%; /* Medium Gray */
+    --accent: 140 80% 40%; /* Green */
+    --accent-foreground: 0 0% 100%; /* White */
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 210 20% 88%; /* Light Gray Border */
+    --input: 210 20% 88%;
+    --ring: 140 80% 35%; /* Dark Green */
+    --radius: 0.75rem; /* Slightly larger radius */
+
+    /* Custom light theme variables */
+    --light-bg-start: 0 0% 100%; /* White */
+    --light-bg-end: 220 50% 96%; /* Very Light Blue-Gray */
+    --light-text-primary: 220 25% 25%; /* Darker Gray */
+    --light-text-secondary: 220 15% 45%; /* Medium Gray */
+    --light-card-bg: 0 0% 100%; /* White */
+    --light-card-border: 220 20% 90%; /* Light Gray Border */
+    --light-button-primary-bg: 140 80% 35%; /* Dark Green */
+    --light-button-primary-text: 0 0% 100%; /* White */
+    --light-button-secondary-border: 140 80% 35%;
+    --light-button-secondary-text: 140 80% 30%;
+    --light-neon-text-shadow: 0 0 8px rgba(34, 139, 34, 0.4), 0 0 15px rgba(34, 139, 34, 0.3), 0 0 25px rgba(34, 139, 34, 0.2);
+    --light-glow-effect: 0 0 15px rgba(34, 139, 34, 0.2), 0 0 30px rgba(34, 139, 34, 0.1), 0 0 50px rgba(34, 139, 34, 0.05);
+    --light-grid-color: rgba(34, 139, 34, 0.15);
+  }
+
+  .dark {
+    --background: 224 71% 4%; /* Near Black */
+    --foreground: 210 40% 98%; /* Light Gray / Off-white */
+    --card: 224 71% 8%; /* Dark Blue-Gray */
+    --card-foreground: 210 40% 98%;
+    --popover: 224 71% 4%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 140 60% 45%; /* Forest Green */
+    --primary-foreground: 0 0% 100%; /* White for contrast on Green */
+    --secondary: 217 33% 17%; /* Darker Blue-Gray */
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 140 60% 45%; /* Forest Green */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217 33% 25%; /* Dark Blue-Gray Border */
+    --input: 217 33% 25%;
+    --ring: 140 60% 45%; /* Forest Green */
+
+    /* Custom dark theme variables (override if needed, otherwise inherits from :root if not redefined) */
+    --dark-neon-text-shadow: 0 0 10px rgba(50, 205, 50, 0.6), 0 0 20px rgba(50, 205, 50, 0.4), 0 0 35px rgba(50, 205, 50, 0.2);
+    --dark-glow-effect: 0 0 20px rgba(50, 205, 50, 0.3), 0 0 40px rgba(50, 205, 50, 0.2), 0 0 60px rgba(50, 205, 50, 0.1);
+    --dark-grid-color: rgba(50, 205, 50, 0.1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border transition-colors duration-300;
+  }
+  body {
+    @apply bg-background text-foreground transition-colors duration-300;
+    /* Light theme specific body background */
+    background-image: linear-gradient(to bottom, hsl(var(--light-bg-start)), hsl(var(--light-bg-end)));
+  }
+  .dark body {
+    /* Dark theme specific body background */
+    background-image: linear-gradient(to bottom, hsl(224 71% 4%), hsl(224 71% 8%));
+  }
+}
+
+.section-padding {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* Base heading styles */
+.section-title {
+  @apply text-3xl md:text-4xl font-bold mb-8 text-center;
+  color: hsl(var(--foreground)); /* Default */
+}
+.dark .section-title {
+   /* Example: specific color for dark theme titles if needed, otherwise inherits */
+  text-shadow: var(--dark-neon-text-shadow);
+}
+html:not(.dark) .section-title {
+  color: hsl(var(--light-text-primary));
+  text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+.section-subtitle {
+  @apply text-xl md:text-2xl font-semibold mb-4;
+  color: hsl(var(--foreground)); /* Default */
+}
+html:not(.dark) .section-subtitle {
+  color: hsl(var(--light-text-secondary));
+}
+
+/* Card styles */
+.custom-card {
+  @apply rounded-lg shadow-lg overflow-hidden transition-all duration-300;
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  }
+html:not(.dark) .custom-card {
+  background-color: hsl(var(--light-card-bg));
+  border-color: hsl(var(--light-card-border));
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.07);
+  }
+.dark .custom-card {
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.1); /* Subtle glow for dark cards */
+}
+
+/* Button styles */
+.btn-primary {
+  @apply px-6 py-3 rounded-md font-semibold transition-all duration-300;
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  border: 1px solid transparent;
+}
+html:not(.dark) .btn-primary {
+  background-color: hsl(var(--light-button-primary-bg));
+  color: hsl(var(--light-button-primary-text));
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+.btn-primary:hover {
+  filter: brightness(110%);
+}
+html:not(.dark) .btn-primary:hover {
+  filter: brightness(105%);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  }
+
+.btn-secondary {
+  @apply px-6 py-3 rounded-md font-semibold transition-all duration-300;
+  background-color: transparent;
+  color: hsl(var(--primary));
+  border: 1px solid hsl(var(--primary));
+  }
+html:not(.dark) .btn-secondary {
+  color: hsl(var(--light-button-secondary-text));
+  border-color: hsl(var(--light-button-secondary-border));
+  }
+.btn-secondary:hover {
+  background-color: hsl(var(--primary) / 0.1);
+}
+html:not(.dark) .btn-secondary:hover {
+  background-color: hsl(var(--light-button-secondary-border) / 0.08);
+  border-color: hsl(var(--light-button-secondary-border) / 0.7);
+}
+
+/* Neon Text & Glow Effects */
+.neon-text {
+  text-shadow: var(--dark-neon-text-shadow);
+}
+html:not(.dark) .neon-text {
+  text-shadow: var(--light-neon-text-shadow);
+}
+
+.glow-effect {
+  box-shadow: var(--dark-glow-effect);
+}
+html:not(.dark) .glow-effect {
+  box-shadow: var(--light-glow-effect);
+}
+
+/* Cyber Grid */
+.cyber-grid {
+  background-image: linear-gradient(var(--dark-grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--dark-grid-color) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+html:not(.dark) .cyber-grid {
+  background-image: linear-gradient(var(--light-grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--light-grid-color) 1px, transparent 1px);
+}
+
+/* Futuristic animations (can remain generic or be themed) */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); } /* Slightly less float */
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+.pulse-ring {
+  animation: pulse-ring 2.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+html:not(.dark) .pulse-ring {
+  border-color: hsl(var(--light-button-secondary-border) / 0.5);
+}
+.dark .pulse-ring {
+  border-color: hsl(var(--primary) / 0.4);
+}
+
+
+/* Ensure specific component backgrounds use these variables for theme consistency */
+/* Example: ProjectsSection background */
+.projects-section-bg {
+  @apply relative overflow-hidden py-20;
+  background-image: linear-gradient(to bottom, hsl(var(--background) / 0.8), hsl(var(--background))); 
+}
+html:not(.dark) .projects-section-bg {
+  background-image: linear-gradient(to bottom, hsl(220 50% 96%), hsl(220 50% 92%)); /* Light theme specific gradient */
+}
+.dark .projects-section-bg {
+  background-image: linear-gradient(to bottom, hsl(224 71% 8% / 0.5), hsl(224 71% 4%)); /* Dark theme specific gradient */
+}
+
+/* Example: AboutSection background */
+.about-section-bg {
+  @apply relative overflow-hidden py-20;
+}
+html:not(.dark) .about-section-bg {
+  background-image: linear-gradient(to bottom, hsl(0 0% 100%), hsl(220 50% 96%)); /* Lighter gradient for About */
+}
+.dark .about-section-bg {
+  background-image: linear-gradient(to bottom, hsl(224 71% 4%), hsl(224 71% 8% / 0.7)); 
+}
+
+
+/* Ensure specific components use text variables */
+html:not(.dark) .text-cyan-300 { /* Example, adjust based on actual usage */
+  color: hsl(var(--light-text-secondary)); 
+}
+html:not(.dark) .text-cyan-400 {
+  color: hsl(var(--light-button-secondary-text));
+}
+html:not(.dark) .text-gray-200 {
+  color: hsl(var(--light-text-primary));
+}
+html:not(.dark) .text-gray-300 {
+  color: hsl(var(--light-text-secondary));
+}
+html:not(.dark) .text-gray-400 {
+  color: hsl(var(--light-text-secondary) / 0.85); /* Slightly muted */
+}
+
+/* Badge overrides for light theme */
+html:not(.dark) .badge-custom {
+  @apply bg-blue-100 text-blue-700 border-blue-300;
+  /* Example: bg-hsl(var(--secondary)) text-hsl(var(--secondary-foreground)) border-hsl(var(--primary) / 0.3) */
+}
+
+/* Ensure icons adapt */
+html:not(.dark) .lucide-icon {
+  color: hsl(var(--light-button-secondary-text));
+}
+.dark .lucide-icon {
+  color: hsl(var(--primary));
+}
